@@ -8,6 +8,7 @@ export const globalStyles = StyleSheet.create({
     titleText: {
         fontFamily:'OpenSans-Bold',
         fontSize: 24,
+        textAlign: 'center',
         color: '#000',
     },
     paragraph: {

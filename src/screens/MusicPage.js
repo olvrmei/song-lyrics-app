@@ -1,8 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Button, ScrollView } from 'react-native';
 import { globalStyles } from '../styles/global';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function MusicPage({ route, navigation }){
+
+    useEffect(() => {
+        async function saveOnHistory(){
+            let search = [];
+            let searchHistory = await AsyncStorage.getItem('@search')
+            
+            if(searchHistory){
+                search = JSON.parse(searchHistory)
+            }
+
+            if(search) // search.lenght > 0
+            {
+                for(let i of search){
+                    if(i.artist === route.params.artist && i.title === route.params.artist) return;
+                }
+            }
+            let data = {
+                artist: route.params.artist,
+                title: route.params.title
+            }
+
+            search.push(data)
+            await AsyncStorage.setItem("@search", JSON.stringify(search))
+        }
+        saveOnHistory()
+    }, [])
+
     return(
         <View style={globalStyles.container}>
             <Button title="Voltar para a busca" onPress={ () => navigation.navigate('SearchResult')} />

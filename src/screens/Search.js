@@ -1,5 +1,5 @@
-import React,{ useState } from 'react';
-import { StyleSheet, View, Text, Button, TextInput, Image, Keyboard } from 'react-native';
+import React,{ useEffect, useState } from 'react';
+import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
 import { globalStyles } from '../styles/global';
 import axios from 'axios';
 
@@ -7,42 +7,7 @@ export default function Search({ navigation }){
     const [artist, setArtist] = useState('')
     const [title, setTitle] = useState('')
     const [lyrics, setLyrics] = useState('')
-    
-    /*const getLyrics = async () => {
-        if(artist == '' || title == '') return;
 
-        await axios.get(`https://api.lyrics.ovh/v1/${artist}/${title}`)
-        .then(response =>{
-            const ly = response.data.lyrics
-
-            if(response.status === 200){
-                if(ly != ""){
-                    setLyrics(ly)
-                    navigation.navigate('SearchResult',{
-                    artist: artist,
-                    title: title,
-                    lyrics: ly,
-                    })
-                    setArtist('')
-                    setTitle('')
-                }
-                else{
-                    navigation.navigate('ErrorSearch')
-                    setArtist('')
-                    setTitle('')
-                    setLyrics('')
-                }
-            }
-            if(response.status === 404){
-                alert('deu tudo errado')
-                return;
-            }
-        })
-        .catch(err => {
-            alert(err.message)
-        })
-    }*/
-    
     const getLyrics = async () => {
         if(artist == '' || title == '') return;
         try {
@@ -50,7 +15,7 @@ export default function Search({ navigation }){
             `https://api.lyrics.ovh/v1/${artist}/${title}`
           );          
           const ly = response.data.lyrics
-          if(ly != ""){
+          if(ly !== ""){
             setLyrics(ly)
             navigation.navigate('SearchResult',{
             artist: artist,
@@ -64,10 +29,10 @@ export default function Search({ navigation }){
             navigation.navigate('ErrorSearch')
             setArtist('')
             setTitle('')
-            setLyrics('')
         }
         } catch (error) {
           alert(error.message);
+          navigation.navigate('ErrorSearch')
         }
     };
     
@@ -92,6 +57,7 @@ export default function Search({ navigation }){
             />
 
             <Button title="Buscar" onPress={() => getLyrics()} />
+            <Button title="Últimas buscas" onPress={() => navigation.navigate('HistoryPage')} />
 
         </View>
     )

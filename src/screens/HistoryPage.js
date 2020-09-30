@@ -7,8 +7,6 @@ import LinearGradient from 'react-native-linear-gradient';
 
 export default function HistoryPage({ navigation }){
     const [search, setSearch] = useState([])
-    const [visible, setVisible] = useState(true)
-
     
     const deleteHistory = async () => {
         await AsyncStorage.setItem('@search', '[]')
@@ -18,15 +16,12 @@ export default function HistoryPage({ navigation }){
         async function loadHistory(){
             var new_search = []
             const searchStorage = await AsyncStorage.getItem('@search')
-
             if(searchStorage){new_search = JSON.parse(searchStorage)}
-
-            setSearch(new_search.reverse())
-            setVisible(true)
+            
+            setSearch(new_search.reverse()) // reverse to get latest searches
         }
         loadHistory()
     }, [])
-
 
     return(
         <LinearGradient colors={[Colors.DARKBLUE, Colors.BLACK]} style={globalStyles.gradient}>

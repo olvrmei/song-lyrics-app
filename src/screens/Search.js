@@ -8,29 +8,27 @@ export default function Search({ navigation }){
     const [artist, setArtist] = useState('')
     const [title, setTitle] = useState('')
     const [lyrics, setLyrics] = useState('')
-
+    
     const getLyrics = async () => {
         if(artist == '' || title == '') return;
         try {
-          const response = await axios.get(
+            const response = await axios.get(
             `https://api.lyrics.ovh/v1/${artist}/${title}`
-          );          
-          const ly = response.data.lyrics
-          if(ly !== ""){
-            setLyrics(ly)
-            navigation.navigate('SearchResult',{
-            artist: artist,
-            title: title,
-            lyrics: ly,
-            })
+            );          
+            const ly = response.data.lyrics
+            if(ly !== ""){
+                setLyrics(ly)
+                navigation.navigate('SearchResult',{
+                artist: artist.toLowerCase(),
+                title: title.toLowerCase(),
+                lyrics: ly,
+                })
+            }
+            else{
+                navigation.navigate('ErrorSearch')
+            }
             setArtist('')
             setTitle('')
-        }
-        else{
-            navigation.navigate('ErrorSearch')
-            setArtist('')
-            setTitle('')
-        }
         } catch (error) {
           alert(error.message);
           navigation.navigate('ErrorSearch')

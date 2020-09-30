@@ -15,8 +15,13 @@ export default function MusicPage({ route, navigation }){
             }
 
             const searchHistory = await AsyncStorage.getItem('@search')
-            if(searchHistory){search = JSON.parse(searchHistory)}
-            
+            if(searchHistory){
+                search = JSON.parse(searchHistory)
+                for(i of search){
+                    if(data.artist === i.artist // to avoid repeating songs on history
+                       && data.title === i.title) return;
+                }
+            }
             search.push(data)
             await AsyncStorage.setItem("@search", JSON.stringify(search))
         }
@@ -25,30 +30,26 @@ export default function MusicPage({ route, navigation }){
 
     return(
         <View style={[globalStyles.container, {backgroundColor:Colors.WHITE}]}>
-            <ScrollView contentContainerStyle={{
-                paddingHorizontal: 43
-            }}>   
+            
             <Image style={globalStyles.logo} source={require('../assets/images/lendo_musica_logo2.png')} />
             
-            <TouchableOpacity 
-            style={styles.backButton}
-            onPress={() => navigation.navigate('SearchResult')} >
-                <Image source={require('../assets/images/arrow_alt_circle_left.png')}/>
-                <Text style={styles.returnText}>Voltar para a busca</Text>
-            </TouchableOpacity>
+            <ScrollView contentContainerStyle={{paddingHorizontal: 43}}>  
+                
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('SearchResult')}>
+                    <Image source={require('../assets/images/arrow_alt_circle_left.png')}/>
+                    <Text style={styles.returnText}>Voltar para a busca</Text>
+                </TouchableOpacity>
 
-             
                 <Text style={styles.titleText}>{route.params.title}</Text>
                 <Text style={styles.lyricsText}>{route.params.lyrics}</Text>
-            
-            
+
                 <Text style={styles.bottomText}>Curtiu? Busque mais letras.</Text>
-                <TouchableOpacity 
-                style={[globalStyles.button, styles.blueButton]}
-                onPress={ () => navigation.navigate('Search')} >
+                
+                <TouchableOpacity style={[globalStyles.button, styles.blueButton]} onPress={ () => navigation.navigate('Search')} >
                     <Image source={require('../assets/images/search_white.png')}/>
                     <Text style={[globalStyles.buttonText, {color: Colors.WHITE}]}>Nova Busca</Text>
                 </TouchableOpacity>
+
             </ScrollView>
         </View>
     )
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     backButton:{
         backgroundColor: 'transparent',
         flexDirection: 'row',
-        alignItems: 'flex-start',
+        alignSelf: 'flex-start',
         justifyContent: 'flex-start',
         marginTop: 20,
         marginBottom: 30,
@@ -93,6 +94,5 @@ const styles = StyleSheet.create({
     blueButton:{
         backgroundColor: Colors.BLUE,
         borderColor: Colors.BLUE,
-        alignSelf: 'center'
     }
 })

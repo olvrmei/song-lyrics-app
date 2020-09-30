@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { globalStyles } from '../styles/global';
 import * as Colors from '../styles/colors';
+import Container from '../components/Container';
 
 export default function SearchResult({ route, navigation }){
     return(
-        <View style={globalStyles.container}>
+        <Container>
             <Image style={globalStyles.logo} source={require('../assets/images/lendo_musica_logo1.png')} />
             <Text style={globalStyles.titleText}>Letra encontrada</Text>
             
@@ -28,7 +29,7 @@ export default function SearchResult({ route, navigation }){
                 <Image source={require('../assets/images/search.png')}/>
                 <Text style={globalStyles.buttonText}>Nova Busca</Text>
             </TouchableOpacity>
-        </View>
+        </Container>
     )
 }
 

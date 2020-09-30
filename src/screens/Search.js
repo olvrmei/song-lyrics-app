@@ -1,7 +1,8 @@
-import React,{ useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput, StatusBar } from 'react-native';
+import React,{ useState } from 'react';
+import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import { globalStyles } from '../styles/global';
 import * as Colors from '../styles/colors';
+import Container from '../components/Container';
 import axios from 'axios';
 
 export default function Search({ navigation }){
@@ -36,8 +37,7 @@ export default function Search({ navigation }){
     };
     
     return(
-        <View style={globalStyles.container}>
-            <StatusBar backgroundColor="#000" />
+        <Container>
             <Image style={globalStyles.logo} source={require('../assets/images/lendo_musica_logo1.png')} />
             <Text style={globalStyles.titleText}>Buscar letra</Text>
             
@@ -61,20 +61,17 @@ export default function Search({ navigation }){
                     onChangeText={ (val) => setTitle(val)}
                 />
             </View>    
-            <TouchableOpacity 
-            style={globalStyles.button}
-            onPress={() => getLyrics()} >
+
+            <TouchableOpacity style={globalStyles.button} onPress={getLyrics} >
                 <Image source={require('../assets/images/search.png')}/>
                 <Text style={globalStyles.buttonText}>Buscar</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
-            style={globalStyles.button}
-            onPress={() => navigation.navigate('HistoryPage')} >
+            <TouchableOpacity style={globalStyles.button} onPress={() => navigation.navigate('HistoryPage')} >
                 <Text style={globalStyles.buttonText}>Últimas buscas</Text>
             </TouchableOpacity>
 
-        </View>
+        </Container>
     )
 }
 

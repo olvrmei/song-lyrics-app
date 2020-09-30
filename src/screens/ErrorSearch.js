@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-import * as Colors from '../styles/colors';
 import { globalStyles } from '../styles/global';
+import * as Colors from '../styles/colors';
+import Container from '../components/Container';
 
 export default function ErrorSearch({ navigation }){
     return(
-        <View style={globalStyles.container}>
+        <Container>
             <Image style={globalStyles.logo} source={require('../assets/images/lendo_musica_logo1.png')} />
             <Text style={globalStyles.titleText}>Letra não encontrada</Text>
             <Image style={styles.image} source={require('../assets/images/illustration_lendo_musica1.png')}/>
@@ -17,7 +18,7 @@ export default function ErrorSearch({ navigation }){
                 <Image source={require('../assets/images/search.png')}/>
                 <Text style={globalStyles.buttonText}>Nova Busca</Text>
             </TouchableOpacity>
-        </View>
+        </Container>
     )
 }
 

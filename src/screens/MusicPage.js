@@ -17,10 +17,11 @@ export default function MusicPage({ route, navigation }){
             const searchHistory = await AsyncStorage.getItem('@search')
             if(searchHistory){
                 search = JSON.parse(searchHistory)
-                for(i of search){
+                for(let i of search){
                     if(data.artist === i.artist // to avoid repeating songs on history
                        && data.title === i.title) return;
                 }
+                
             }
             search.push(data)
             await AsyncStorage.setItem("@search", JSON.stringify(search))
@@ -29,7 +30,7 @@ export default function MusicPage({ route, navigation }){
     }, [])
 
     return(
-        <View style={[globalStyles.container, {backgroundColor:Colors.WHITE}]}>
+        <View style={globalStyles.container}>
             
             <Image style={globalStyles.logo} source={require('../assets/images/lendo_musica_logo2.png')} />
             

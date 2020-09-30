@@ -16,7 +16,7 @@ export const globalStyles = StyleSheet.create({
     container:{
         flex: 1,
         alignItems: 'center',
-        backgroundColor:'#004',
+        backgroundColor: Colors.WHITE,
     },
     titleText: {
         fontFamily:'OpenSans-Bold',

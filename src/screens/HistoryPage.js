@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView} from 'reac
 import { globalStyles } from '../styles/global';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Colors from '../styles/colors';
-import LinearGradient from 'react-native-linear-gradient';
+import Container from '../components/Container';
 
 export default function HistoryPage({ navigation }){
     const [search, setSearch] = useState([])
@@ -17,35 +17,34 @@ export default function HistoryPage({ navigation }){
             var new_search = []
             const searchStorage = await AsyncStorage.getItem('@search')
             if(searchStorage){new_search = JSON.parse(searchStorage)}
-            
+
             setSearch(new_search.reverse()) // reverse to get latest searches
         }
         loadHistory()
     }, [])
 
     return(
-        <LinearGradient colors={[Colors.DARKBLUE, Colors.BLACK]} style={globalStyles.gradient}>
-            
+        <Container>
             <Image style={globalStyles.logo} source={require('../assets/images/lendo_musica_logo1.png')} />
-            <TouchableOpacity 
-            onPress={deleteHistory}>
+            
+            <TouchableOpacity onPress={deleteHistory}>
                 <Text style={styles.cleanText}>Limpar Histórico X</Text>
             </TouchableOpacity>
-            <ScrollView
-            showsVerticalScrollIndicator={false}>
+            
+            <ScrollView showsVerticalScrollIndicator={false}>
                 {search.map((item,i) => (
                     <View style={globalStyles.button} key={i}>
                         <Text style={styles.historyText}>{item.artist} - {item.title}</Text>
                     </View>
                 ))}
             </ScrollView>
-            <TouchableOpacity 
-            style={globalStyles.button}
-            onPress={() => navigation.goBack()} >
+
+            <TouchableOpacity style={globalStyles.button} onPress={() => navigation.goBack()}>
                 <Image source={require('../assets/images/search.png')}/>
                 <Text style={globalStyles.buttonText}>Buscar</Text>
             </TouchableOpacity>
-        </LinearGradient>
+
+        </Container>
     )
 }
 

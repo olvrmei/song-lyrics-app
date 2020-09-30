@@ -7,20 +7,12 @@ export default function MusicPage({ route, navigation }){
 
     useEffect(() => {
         async function saveOnHistory(){
-            let search = [];
-            let searchHistory = await AsyncStorage.getItem('@search')
+            var search = [];
+            const searchHistory = await AsyncStorage.getItem('@search')
             
-            if(searchHistory){
-                search = JSON.parse(searchHistory)
-            }
-
-            if(search) // search.lenght > 0
-            {
-                for(let i of search){
-                    if(i.artist === route.params.artist && i.title === route.params.artist) return;
-                }
-            }
-            let data = {
+            if(searchHistory){search = JSON.parse(searchHistory)}
+            
+            const data = {
                 artist: route.params.artist,
                 title: route.params.title
             }

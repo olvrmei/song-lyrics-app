@@ -1,6 +1,7 @@
 import React,{ useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput, StatusBar } from 'react-native';
 import { globalStyles } from '../styles/global';
+import * as Colors from '../styles/colors';
 import axios from 'axios';
 
 export default function Search({ navigation }){
@@ -38,26 +39,42 @@ export default function Search({ navigation }){
     
     return(
         <View style={globalStyles.container}>
-            <Text style={globalStyles.titleText}>Buscar</Text>
+            <StatusBar backgroundColor="#000" />
+            <Image style={globalStyles.logo} source={require('../assets/images/lendo_musica_logo1.png')} />
+            <Text style={globalStyles.titleText}>Buscar letra</Text>
             
-        <Text style={styles.inputArtist}>Artista</Text>
-            <TextInput 
-                style={styles.input}
-                value={artist}
-                placeholder='Insira o nome do artista'
-                onChangeText={ (val) => setArtist(val)}
-            />
+            <View style={styles.inputBox}>
+                <Text style={styles.inputTitle}>Artista</Text>
+                <TextInput 
+                    style={styles.input}
+                    value={artist}
+                    placeholder='Insira o nome do artista'
+                    placeholderTextColor= '#828282'
+                    onChangeText={ (val) => setArtist(val)}
+                />
+            </View>
+            <View style={styles.inputBox}>
+                <Text style={styles.inputTitle}>Música</Text>
+                <TextInput 
+                    style={styles.input}
+                    value={title}
+                    placeholder='Insira o nome da música'
+                    placeholderTextColor= '#828282'
+                    onChangeText={ (val) => setTitle(val)}
+                />
+            </View>    
+            <TouchableOpacity 
+            style={globalStyles.button}
+            onPress={() => getLyrics()} >
+                <Image source={require('../assets/images/search.png')}/>
+                <Text style={globalStyles.buttonText}>Buscar</Text>
+            </TouchableOpacity>
 
-            <Text style={styles.inputTitle}>Música</Text>
-            <TextInput 
-                style={styles.input}
-                value={title}
-                placeholder='Insira o nome da música'
-                onChangeText={ (val) => setTitle(val)}
-            />
-
-            <Button title="Buscar" onPress={() => getLyrics()} />
-            <Button title="Últimas buscas" onPress={() => navigation.navigate('HistoryPage')} />
+            <TouchableOpacity 
+            style={globalStyles.button}
+            onPress={() => navigation.navigate('HistoryPage')} >
+                <Text style={globalStyles.buttonText}>Últimas buscas</Text>
+            </TouchableOpacity>
 
         </View>
     )
@@ -69,15 +86,21 @@ const styles = StyleSheet.create({
         fontSize: 16,
         alignContent:'center',
         textAlign: 'left',
-        color: '#000',
+        color: Colors.WHITE,
     },
     input:{
-        borderWidth:1,
-        borderColor:'#777',
-        padding: 8,
-        margin: 10,
-        width: 300,
+        justifyContent: 'flex-start',
         fontFamily:'OpenSans-Regular',
         fontSize: 16,
+        color: Colors.WHITE,
+        textAlign: 'left',
     },
+    inputBox:{
+        marginTop: 30,
+        marginBottom: 30,
+        width: 276,
+        height: 59,
+        borderColor: Colors.WHITE,
+        borderBottomWidth: 1,
+    }
 })

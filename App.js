@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Search from './src/screens/Search'
@@ -13,11 +14,11 @@ export default function App () {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Search">
-          <Stack.Screen name="Search" component={Search} />
-          <Stack.Screen name="SearchResult" component={SearchResult} />
-          <Stack.Screen name="ErrorSearch" component={ErrorSearch} />
-          <Stack.Screen name="MusicPage" component={MusicPage} />
-          <Stack.Screen name="HistoryPage" component={HistoryPage} />
+          <Stack.Screen name="Search" component={Search} options={{headerShown:false}}/>
+          <Stack.Screen name="SearchResult" component={SearchResult} options={{headerShown:false}} />
+          <Stack.Screen name="ErrorSearch" component={ErrorSearch} options={{headerShown:false}}/>
+          <Stack.Screen name="MusicPage" component={MusicPage} options={{headerShown:false}}/>
+          <Stack.Screen name="HistoryPage" component={HistoryPage} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     );

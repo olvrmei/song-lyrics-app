@@ -15,12 +15,12 @@ export default function MusicPage({ route, navigation }){
             const searchHistory = await AsyncStorage.getItem('@search')
             if(searchHistory){
                 search = JSON.parse(searchHistory)
-                for(let i of search){
-                    if(data.artist === i.artist
-                       && data.title === i.title) return;
+                for(let i = 0; i < search.length; i++){
+                    if(data.artist === search[i].artist
+                       && data.title === search[i].title) return;
                 }
-                // if(search.lenght > 9) search.split(1)
-                if(search.lenght > 9) search.shift()
+                // if(search.length > 9) search.split(1)
+                if(search.length > 9) search.shift();
             }
             search.push(data)
             await AsyncStorage.setItem("@search", JSON.stringify(search))

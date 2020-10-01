@@ -5,6 +5,15 @@ import AsyncStorage from '@react-native-community/async-storage';
 import * as Colors from '../styles/colors';
 
 export default function MusicPage({ route, navigation }){
+    
+    function checkInStorage(search, artist, title){
+        for(let i of search){
+            if(artist === i.artist
+            && title === i.title) return false
+        }
+        return true
+    }
+    
     useEffect(() => {
         async function saveOnHistory(){
             var search = [];            
@@ -13,17 +22,12 @@ export default function MusicPage({ route, navigation }){
                 title: route.params.title
             }
             const searchHistory = await AsyncStorage.getItem('@search')
-            if(searchHistory){
-                search = JSON.parse(searchHistory)
-                for(let i = 0; i < search.length; i++){
-                    if(data.artist === search[i].artist
-                       && data.title === search[i].title) return;
-                }
-                // if(search.length > 9) search.split(1)
-                if(search.length > 9) search.shift();
-            }
-            search.push(data)
-            await AsyncStorage.setItem("@search", JSON.stringify(search))
+            if(searchHistory) search = JSON.parse(searchHistory)
+            if(checkInStorage(search, data.artist, data.title)){
+                if(search.length > 3) search.shift()
+                search.push(data)
+                await AsyncStorage.setItem("@search", JSON.stringify(search))
+            }else{return}
         }
         saveOnHistory()
     }, [])

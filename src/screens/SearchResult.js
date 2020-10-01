@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { globalStyles } from '../styles/global';
 import * as Colors from '../styles/colors';
 import Container from '../components/Container';
@@ -8,6 +8,7 @@ export default function SearchResult({ route, navigation }){
     return(
         <Container>
             <Image style={globalStyles.logo} source={require('../assets/images/lendo_musica_logo1.png')} />
+            
             <Text style={globalStyles.titleText}>Letra encontrada</Text>
             
             <TouchableOpacity style={styles.result} onPress={() => navigation.navigate('MusicPage', {

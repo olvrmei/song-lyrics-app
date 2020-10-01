@@ -39,6 +39,7 @@ export default function Search({ navigation }){
     return(
         <Container>
             <Image style={globalStyles.logo} source={require('../assets/images/lendo_musica_logo1.png')} />
+            
             <Text style={globalStyles.titleText}>Buscar letra</Text>
             
             <View style={styles.inputBox}>
@@ -51,6 +52,7 @@ export default function Search({ navigation }){
                     onChangeText={ (val) => setArtist(val)}
                 />
             </View>
+            
             <View style={styles.inputBox}>
                 <Text style={styles.inputTitle}>Música</Text>
                 <TextInput 

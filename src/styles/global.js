@@ -26,9 +26,6 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 20,
         marginTop: 29,
     },
-    paragraph: {
-        marginVertical: 8,
-    },
     button:{
         alignItems: 'center',
         justifyContent: 'center',

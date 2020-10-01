@@ -10,9 +10,7 @@ export default function SearchResult({ route, navigation }){
             <Image style={globalStyles.logo} source={require('../assets/images/lendo_musica_logo1.png')} />
             <Text style={globalStyles.titleText}>Letra encontrada</Text>
             
-            <TouchableOpacity 
-            style={styles.result}
-            onPress={() => navigation.navigate('MusicPage', {
+            <TouchableOpacity style={styles.result} onPress={() => navigation.navigate('MusicPage', {
                 artist: route.params.artist,
                 title: route.params.title,
                 lyrics: route.params.lyrics,

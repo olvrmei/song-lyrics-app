@@ -28,7 +28,6 @@ export const globalStyles = StyleSheet.create({
     },
     paragraph: {
         marginVertical: 8,
-        lineHeight: 20,
     },
     button:{
         alignItems: 'center',

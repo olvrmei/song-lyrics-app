@@ -67,7 +67,7 @@ export default function Search({ navigation }){
                 <Text style={globalStyles.buttonText}>Buscar</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={globalStyles.button} onPress={() => navigation.navigate('HistoryPage')} >
+            <TouchableOpacity style={globalStyles.button} onPress={() => {navigation.navigate('HistoryPage');setArtist('');setTitle('');}} >
                 <Text style={globalStyles.buttonText}>Últimas buscas</Text>
             </TouchableOpacity>
 

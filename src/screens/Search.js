@@ -47,7 +47,7 @@ export default function Search({ navigation }){
                 <TextInput 
                     style={styles.input}
                     value={artist}
-                    placeholder='Insira o nome do artista'
+                    placeholder='Insira o artista'
                     placeholderTextColor= '#828282'
                     onChangeText={ (val) => setArtist(val)}
                 />

@@ -58,7 +58,7 @@ export default function Search({ navigation }){
                 <TextInput 
                     style={styles.input}
                     value={title}
-                    placeholder='Insira o nome da música'
+                    placeholder='Insira a música'
                     placeholderTextColor= '#828282'
                     onChangeText={ (val) => setTitle(val)}
                 />

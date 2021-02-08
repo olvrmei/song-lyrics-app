@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput } from 'reac
 import { globalStyles } from '../styles/global';
 import * as Colors from '../styles/colors';
 import Container from '../components/Container';
-import axios from 'axios';
+import api from '../services/lyricsapi.js';
 
 export default function Search({ navigation }){
     const [artist, setArtist] = useState('')
@@ -13,7 +13,7 @@ export default function Search({ navigation }){
     const getLyrics = async () => {
         if(artist == '' || title == '') return;
         try {
-            const response = await axios.get(
+            const response = await api.get(
             `https://api.lyrics.ovh/v1/${artist}/${title}`
             );          
             const ly = response.data.lyrics

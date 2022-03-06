@@ -25,7 +25,7 @@ API used for requesting the lyrics: <a href="https://lyricsovh.docs.apiary.io/#"
 </p>
 
 <p align="center">
-  <img alt="Logo" src="/demo.png">
+  <img alt="App demo" src="/demo.png">
 </p>
 
 ## 🔨 Built using:

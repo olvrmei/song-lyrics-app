@@ -24,7 +24,9 @@ API used for requesting the lyrics: <a href="https://lyricsovh.docs.apiary.io/#"
   Lendo Música is an application in which you can find the lyrics of a song by inputting the name of the song and artist. It also features a history of all your searches!
 </p>
 
-<!-- Add images -->
+<p align="center">
+  <img alt="Logo" src="/demo.png">
+</p>
 
 ## 🔨 Built using:
 - Javascript
